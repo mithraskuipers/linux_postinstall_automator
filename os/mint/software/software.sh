@@ -1,7 +1,5 @@
 #!/bin/bash
 
-PASSWORD=$(zenity --password)
-
 app_cmd_brave="echo $PASSWORD | \
 	sudo -Sk apt install -y apt-transport-https | \
 	apt install -y curl gnupg ;  apt install -y gnupg ; \
@@ -19,19 +17,17 @@ app_cmd_element="echo $PASSWORD | \
 	sudo apt update | \
 	sudo apt install element-desktop -y"
 
-app_choice=$(zenity --list --width=500 --height=250 --window-icon=question --checklist \
-	--title="Software selection" --column="Pick" --column="Choices" \
-	TRUE Brave \
-	TRUE Element \
-	--separator=",")
-
 app_name_element="Element"
 app_name_brave="Brave"
 
-if grep -q "$app_name_element" <<< "$app_choice"; then
+app_menu_options="TRUE Brave TRUE Element"
+app_menu_choices=$(zenity --list --width=500 --height=250 --window-icon=question --checklist \
+	--title="Software selection" --column="Pick" --column="Choices" ${app_menu_options} --separator=",")
+
+if grep -q "$app_name_element" <<< "$app_menu_choices"; then
 	echo $app_cmd_element | bash
 fi
 
-if grep -q "$app_name_brave" <<< "$app_choice"; then
+if grep -q "$app_name_brave" <<< "$app_menu_choices"; then
 	echo $app_cmd_brave | bash
 fi
