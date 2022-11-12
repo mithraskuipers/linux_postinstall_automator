@@ -50,6 +50,23 @@ app_cmd_ytdlp="echo $PASSWORD | \
 	sudo apt install yt-dlp -y ;
 	sudo apt-get install aria2 -y"
 
+# WINE64
+app_cmd_wine64="echo $PASSWORD | \
+	sudo apt install wine64 -y"
+
+# LUTRIS
+app_cmd_lutris="echo $PASSWORD | \
+	sudo apt install lutris -y"
+
+# QBITTORRENT
+func_install_qbittorrent()
+{
+	echo $PASSWORD | sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable ;
+	echo $PASSWORD | sudo apt-get update
+	echo $PASSWORD | sudo apt-get install qbittorrent 
+}
+
+
 ################################################################################
 # Menu settings                                                                #
 ################################################################################
@@ -62,16 +79,24 @@ app_name_gcc="GCC"
 app_name_clang="clang"
 app_name_clang="gedit"
 app_name_ytdlp="ytdlp"
+app_name_wine64="wine64"
+app_name_lutris="lutris"
+app_name_qbittorrent="qbittorrent"
 
 menu_title="Select\ software\ to\ automatically\ install"
-menu_options="	TRUE Brave\
-				TRUE Element\
-				TRUE Git\
-				TRUE Make\
-				TRUE GCC\
-				TRUE clang\
-				TRUE ytdlp\
-				TRUE gedit"
+menu_options="	Brave\
+				clang\
+				Element\
+				GCC\
+				gedit\
+				Git\
+				lutris\
+				Make\
+				wine64\
+				ytdlp\
+				qbittorrent
+			"
+
 
 ################################################################################
 # Show the menu                                                                #
@@ -116,4 +141,16 @@ fi
 
 if grep -q "$app_name_ytdlp" <<< "$app_menu_choices"; then
 	echo $app_cmd_ytdlp | bash
+fi
+
+if grep -q "$app_name_wine64" <<< "$app_menu_choices"; then
+	echo $app_cmd_wine64 | bash
+fi
+
+if grep -q "$app_name_lutris" <<< "$app_menu_choices"; then
+	echo $app_cmd_lutris | bash
+fi
+
+if grep -q "$app_name_qbittorrent" <<< "$app_menu_choices"; then
+	func_install_qbittorrent
 fi

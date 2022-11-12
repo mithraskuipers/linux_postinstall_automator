@@ -1,1 +1,1 @@
-menu_template="zenity --list --width=500 --height=500 --window-icon=question --checklist --title=${menu_title} --column='Pick' --column='Choices' ${menu_options} --separator=','"
+menu_template="zenity --list --multiple --width=500 --height=500 --window-icon=question --title=${menu_title} --column='Name' ${menu_options} --separator=','"

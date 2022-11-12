@@ -25,13 +25,25 @@ func_cfg_ytdlp()
 	echo 'alias ytc="yt-dlp --config-location ~/.config/yt-dlp/config_comments"' >> ~/.bashrc
 }
 
+# GIT
+func_cfg_git()
+{
+	echo 'alias gac="git add . && git commit -m"' >> ~/.bashrc ;
+	echo 'alias gp="git push"' >> ~/.bashrc ;
+	echo 'alias gpf="git push -f origin master"' >> ~/.bashrc ;
+	echo 'alias gpb="git push --set-upstream origin"' >> ~/.bashrc ;
+	echo 'alias gc="git checkout"' >> ~/.bashrc ;
+	echo 'alias gm="git merge"' >> ~/.bashrc ;
+	echo 'alias gb="git branch' >> ~/.bashrc ;
+}
+
 ################################################################################
 # Menu settings                                                                #
 ################################################################################
 
 app_name_ytdlp="ytdlp"
 menu_title="Select\ software\ to\ automatically\ configure"
-menu_options="FALSE ytdlp"
+menu_options="ytdlp git"
 
 ################################################################################
 # Show the menu                                                                #
@@ -48,4 +60,8 @@ app_menu_choices=$(eval "$menu_template")
 
 if grep -q "$app_name_ytdlp" <<< "$app_menu_choices"; then
 	func_cfg_ytdlp
+fi
+
+if grep -q "$app_name_git" <<< "$app_menu_choices"; then
+	func_cfg_git
 fi
