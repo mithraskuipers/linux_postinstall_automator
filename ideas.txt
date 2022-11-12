@@ -1,0 +1,10 @@
+slack
+telegram
+vscode
+git make gcc clang
+themes
+icons
+
+setup git (there is no need for DoNotDelete actually, just the name and email commands)
+vscode settings
+lutris
