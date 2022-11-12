@@ -34,7 +34,7 @@ func_cfg_git()
 	echo 'alias gpb="git push --set-upstream origin"' >> ~/.bashrc ;
 	echo 'alias gc="git checkout"' >> ~/.bashrc ;
 	echo 'alias gm="git merge"' >> ~/.bashrc ;
-	echo 'alias gb="git branch' >> ~/.bashrc ;
+	echo 'alias gb="git branch"' >> ~/.bashrc ;
 }
 
 ################################################################################
