@@ -2,13 +2,12 @@
 
 cfg_path=$(echo $(pwd))
 
-
 ################################################################################
 # Application installation commands                                            #
 ################################################################################
 
 # YTDLP
-func_cfg_ytdlp()
+function func_cfg_ytdlp()
 {
 	cfg_path_ytdlp_destination=$(echo ~/.config/yt-dlp) ;
 	mkdir -p $cfg_path_ytdlp_destination ;
@@ -20,14 +19,24 @@ func_cfg_ytdlp()
 	cp $cfg_path_ytdlp_source_config $cfg_path_ytdlp_destination ;
 	cp $cfg_path_ytdlp_source_config_comments $cfg_path_ytdlp_destination ;
 	cp $cfg_path_ytdlp_source_config_audio $cfg_path_ytdlp_destination ;
+	sed -i '/ yt=/d' ~/.bashrc
+	sed -i '/ yta=/d' ~/.bashrc
+	sed -i '/ ytc=/d' ~/.bashrc
 	echo 'alias yt="yt-dlp"' >> ~/.bashrc ;
 	echo 'alias yta="yt-dlp --config-location ~/.config/yt-dlp/config_audio"' >> ~/.bashrc ;
 	echo 'alias ytc="yt-dlp --config-location ~/.config/yt-dlp/config_comments"' >> ~/.bashrc
 }
 
 # GIT
-func_cfg_git()
+function func_cfg_git()
 {
+	sed -i '/ gac=/d' ~/.bashrc
+	sed -i '/ gp=/d' ~/.bashrc
+	sed -i '/ gpf=/d' ~/.bashrc
+	sed -i '/ gpb=/d' ~/.bashrc
+	sed -i '/ gc=/d' ~/.bashrc
+	sed -i '/ gm=/d' ~/.bashrc
+	sed -i '/ gb=/d' ~/.bashrc
 	echo 'alias gac="git add . && git commit -m"' >> ~/.bashrc ;
 	echo 'alias gp="git push"' >> ~/.bashrc ;
 	echo 'alias gpf="git push -f origin master"' >> ~/.bashrc ;
@@ -38,13 +47,22 @@ func_cfg_git()
 }
 
 # QBITTORRENT
-func_cfg_qbittorrent()
+function func_cfg_qbittorrent()
 {
 	cfg_path_qbittorrent=${cfg_path}/os/shared/qbittorrent ;
     cfg_path_qbittorrent_source=${cfg_path_qbittorrent}/qBittorrent.conf ;
 	cfg_path_qbittorrent_destination=$(echo ~/.config/qBittorrent) ;
     mkdir -p $cfg_path_qbittorrent_destination ;
     cp $cfg_path_qbittorrent_source $cfg_path_qbittorrent_destination ;
+}
+
+
+# BRAVE EXTENSIONS
+function func_cfg_brave()
+{
+	brave-browser \
+		https://chrome.google.com/webstore/detail/adblock-for-youtube/cmedhionkhpnakcndndgjdbohmhepckk \
+		https://chrome.google.com/webstore/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle ;
 }
 
 ################################################################################
@@ -54,12 +72,14 @@ func_cfg_qbittorrent()
 app_name_ytdlp="ytdlp"
 app_name_git="git"
 app_name_git="qbittorrent"
+app_name_brave="brave"
 
 menu_title="Select\ software\ to\ automatically\ configure"
 menu_options="\
 'ytdlp [config + alias]' \
 'git [alias]' \
 'qbittorrent [upload 10kbps; autom. torrent removal when finished]' \
+'brave [extensions]' \
 "
 
 ################################################################################
@@ -76,16 +96,17 @@ app_menu_choices=$(eval "$menu_template")
 ################################################################################
 
 if grep -q "$app_name_ytdlp" <<< "$app_menu_choices"; then
-	echo "YTDLP CHOSEN"
 	func_cfg_ytdlp
 fi
 
 if grep -q "$app_name_git" <<< "$app_menu_choices"; then
-	echo "GIT CHOSEN"
 	func_cfg_git
 fi
 
 if grep -q "$app_name_qbittorrent" <<< "$app_menu_choices"; then
-	echo "QBITTORRENT CHOSEN"
 	func_cfg_qbittorrent
+fi
+
+if grep -q "$app_name_brave" <<< "$app_menu_choices"; then
+	func_cfg_brave
 fi
