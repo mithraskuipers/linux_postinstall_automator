@@ -37,13 +37,30 @@ func_cfg_git()
 	echo 'alias gb="git branch"' >> ~/.bashrc ;
 }
 
+# QBITTORRENT
+func_cfg_qbittorrent()
+{
+	cfg_path_qbittorrent=${cfg_path}/os/shared/qbittorrent ;
+    cfg_path_qbittorrent_source=${cfg_path_qbittorrent}/qBittorrent.conf ;
+	cfg_path_qbittorrent_destination=$(echo ~/.config/qBittorrent) ;
+    mkdir -p $cfg_path_qbittorrent_destination ;
+    cp $cfg_path_qbittorrent_source $cfg_path_qbittorrent_destination ;
+}
+
 ################################################################################
 # Menu settings                                                                #
 ################################################################################
 
 app_name_ytdlp="ytdlp"
+app_name_git="git"
+app_name_git="qbittorrent"
+
 menu_title="Select\ software\ to\ automatically\ configure"
-menu_options="ytdlp git"
+menu_options="\
+'ytdlp [config + alias]' \
+'git [alias]' \
+'qbittorrent [upload 10kbps; autom. torrent removal when finished]' \
+"
 
 ################################################################################
 # Show the menu                                                                #
@@ -59,9 +76,16 @@ app_menu_choices=$(eval "$menu_template")
 ################################################################################
 
 if grep -q "$app_name_ytdlp" <<< "$app_menu_choices"; then
+	echo "YTDLP CHOSEN"
 	func_cfg_ytdlp
 fi
 
 if grep -q "$app_name_git" <<< "$app_menu_choices"; then
+	echo "GIT CHOSEN"
 	func_cfg_git
+fi
+
+if grep -q "$app_name_qbittorrent" <<< "$app_menu_choices"; then
+	echo "QBITTORRENT CHOSEN"
+	func_cfg_qbittorrent
 fi
