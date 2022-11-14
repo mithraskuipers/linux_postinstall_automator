@@ -24,7 +24,8 @@ function func_cfg_ytdlp()
 	sed -i '/ ytc=/d' ~/.bashrc
 	echo 'alias yt="yt-dlp"' >> ~/.bashrc ;
 	echo 'alias yta="yt-dlp --config-location ~/.config/yt-dlp/config_audio"' >> ~/.bashrc ;
-	echo 'alias ytc="yt-dlp --config-location ~/.config/yt-dlp/config_comments"' >> ~/.bashrc
+	echo 'alias ytc="yt-dlp --config-location ~/.config/yt-dlp/config_comments"' >> ~/.bashrc ;
+	return ;
 }
 
 # GIT
@@ -44,6 +45,7 @@ function func_cfg_git()
 	echo 'alias gc="git checkout"' >> ~/.bashrc ;
 	echo 'alias gm="git merge"' >> ~/.bashrc ;
 	echo 'alias gb="git branch"' >> ~/.bashrc ;
+	return ;
 }
 
 # QBITTORRENT
@@ -54,6 +56,7 @@ function func_cfg_qbittorrent()
 	cfg_path_qbittorrent_destination=$(echo ~/.config/qBittorrent) ;
     mkdir -p $cfg_path_qbittorrent_destination ;
     cp $cfg_path_qbittorrent_source $cfg_path_qbittorrent_destination ;
+	return ;
 }
 
 
@@ -64,7 +67,9 @@ function func_cfg_brave()
 		https://chrome.google.com/webstore/detail/adblock-for-youtube/cmedhionkhpnakcndndgjdbohmhepckk \
 		https://chrome.google.com/webstore/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle \
 		https://chrome.google.com/webstore/detail/auto-history-wipe/hdgnienkeomlaeeojaibeicglpoaadnj?hl=en ;
+	return ;
 }
+
 
 ################################################################################
 # Menu settings                                                                #
@@ -95,21 +100,17 @@ app_menu_choices=$(eval "$menu_template")
 ################################################################################
 
 if grep -q "$app_name_ytdlp" <<< "$app_menu_choices"; then
-	echo "Configuring yt-dlp settings + setting yt-dlp aliases.." ;
 	func_cfg_ytdlp
 fi
 
 if grep -q "$app_name_git" <<< "$app_menu_choices"; then
-	echo "Setting Git aliases.." ;
 	func_cfg_git
 fi
 
 if grep -q "$app_name_qbittorrent" <<< "$app_menu_choices"; then
-	echo "Copying over qBittorrent configuration to system.." ;
 	func_cfg_qbittorrent
 fi
 
 if grep -q "$app_name_brave" <<< "$app_menu_choices"; then
-	echo "Redirecting to Brave browser extension pages.." ;
 	func_cfg_brave
 fi

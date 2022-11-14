@@ -5,14 +5,15 @@
 ################################################################################
 
 # BROWSER: BRAVE
-app_cmd_brave="echo $PASSWORD | \
-	sudo -Sk apt install -y apt-transport-https | \
-	apt install -y curl gnupg ;  apt install -y gnupg ; \
-	curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | \
-	sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add - ; \
-	'deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main' | \
-	sudo tee /etc/apt/sources.list.d/brave-browser-release.list && sudo apt update -m ; \
-	apt install -y brave-browser"
+func_install_brave()
+{
+	echo $PASSWORD | udo apt install apt-transport-https curl
+	echo $PASSWORD | sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+	echo $PASSWORD | echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+	echo $PASSWORD | sudo apt update
+	echo $PASSWORD | sudo apt install brave-browser
+	return ;
+}
 
 # MESSENGER: ELEMENT
 app_cmd_element="echo $PASSWORD | \
@@ -77,6 +78,18 @@ func_install_xbindkeys()
 	echo $PASSWORD | sudo apt-get install xbindkeys ;
 }
 
+func_install_vscode()
+{
+	echo $PASSWORD | sudo apt-get install wget gpg ;
+	wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg ;
+	echo $PASSWORD | sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg ;
+	echo $PASSWORD | sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list' ;
+	rm -f packages.microsoft.gpg ;
+	echo $PASSWORD | sudo apt install apt-transport-https ;
+	echo $PASSWORD | sudo apt update ;
+	echo $PASSWORD | sudo apt install code ;
+}
+
 ################################################################################
 # Menu settings                                                                #
 ################################################################################
@@ -94,6 +107,7 @@ app_name_lutris="lutris"
 app_name_qbittorrent="qbittorrent"
 app_name_xtrlock="xtrlock"
 app_name_xbindkeys="xbindkeys"
+app_name_vscode="vscode"
 
 menu_title="Install"
 
@@ -109,7 +123,9 @@ menu_options="'Brave' 'browser'\
 			'ytdlp' 'YouTube download tool'\
 			'qbittorrent' 'download tool'\
 			'xtrlock' 'keyboard lock'\
-			'xbindkeys' 'custom keyboard shortcuts'"
+			'xbindkeys' 'custom keyboard shortcuts'\
+			'vscode' 'engineering'\
+			"
 
 ################################################################################
 # Show the menu                                                                #
@@ -125,7 +141,7 @@ app_menu_choices=$(eval "$menu_template")
 ################################################################################
 
 if grep -q "$app_name_brave" <<< "$app_menu_choices"; then
-	echo $app_cmd_brave | bash
+	func_install_brave
 fi
 
 if grep -q "$app_name_element" <<< "$app_menu_choices"; then
@@ -174,4 +190,8 @@ fi
 
 if grep -q "$app_name_xbindkeys" <<< "$app_menu_choices"; then
 	func_install_xbindkeys
+fi
+
+if grep -q "$app_name_vscode" <<< "$app_menu_choices"; then
+	func_install_vscode
 fi
