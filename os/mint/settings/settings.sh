@@ -59,7 +59,6 @@ function func_cfg_qbittorrent()
 	return ;
 }
 
-
 # BRAVE EXTENSIONS
 function func_cfg_brave()
 {
@@ -69,7 +68,6 @@ function func_cfg_brave()
 		https://chrome.google.com/webstore/detail/auto-history-wipe/hdgnienkeomlaeeojaibeicglpoaadnj?hl=en ;
 	return ;
 }
-
 
 ################################################################################
 # Menu settings                                                                #
