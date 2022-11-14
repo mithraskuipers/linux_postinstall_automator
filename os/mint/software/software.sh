@@ -62,10 +62,20 @@ app_cmd_lutris="echo $PASSWORD | \
 func_install_qbittorrent()
 {
 	echo $PASSWORD | sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable ;
-	echo $PASSWORD | sudo apt-get update
-	echo $PASSWORD | sudo apt-get install qbittorrent 
+	echo $PASSWORD | sudo apt-get update ;
+	echo $PASSWORD | sudo apt-get install qbittorrent ;
 }
 
+# XTRLOCK
+func_install_xtrlock()
+{
+	echo $PASSWORD | sudo apt-get install xtrlock ;
+}
+
+func_install_xbindkeys()
+{
+	echo $PASSWORD | sudo apt-get install xbindkeys ;
+}
 
 ################################################################################
 # Menu settings                                                                #
@@ -82,21 +92,24 @@ app_name_ytdlp="ytdlp"
 app_name_wine64="wine64"
 app_name_lutris="lutris"
 app_name_qbittorrent="qbittorrent"
+app_name_xtrlock="xtrlock"
+app_name_xbindkeys="xbindkeys"
 
-menu_title="Select\ software\ to\ automatically\ install"
-menu_options="	Brave\
-				clang\
-				Element\
-				GCC\
-				gedit\
-				Git\
-				lutris\
-				Make\
-				wine64\
-				ytdlp\
-				qbittorrent
-			"
+menu_title="Install"
 
+menu_options="'Brave' 'browser'\
+			'clang' 'engineering'\
+			'Element' 'messenger'\
+			'GCC' 'engineering'\
+			'gedit' 'text editor'\
+			'Git' 'engineering'\
+			'lutris' 'gaming'\
+			'Make' 'engineering'\
+			'wine64' 'gaming'\
+			'ytdlp' 'YouTube download tool'\
+			'qbittorrent' 'download tool'\
+			'xtrlock' 'keyboard lock'\
+			'xbindkeys' 'custom keyboard shortcuts'"
 
 ################################################################################
 # Show the menu                                                                #
@@ -153,4 +166,12 @@ fi
 
 if grep -q "$app_name_qbittorrent" <<< "$app_menu_choices"; then
 	func_install_qbittorrent
+fi
+
+if grep -q "$app_name_xtrlock" <<< "$app_menu_choices"; then
+	func_install_xtrlock
+fi
+
+if grep -q "$app_name_xbindkeys" <<< "$app_menu_choices"; then
+	func_install_xbindkeys
 fi

@@ -62,7 +62,8 @@ function func_cfg_brave()
 {
 	brave-browser \
 		https://chrome.google.com/webstore/detail/adblock-for-youtube/cmedhionkhpnakcndndgjdbohmhepckk \
-		https://chrome.google.com/webstore/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle ;
+		https://chrome.google.com/webstore/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle \
+		https://chrome.google.com/webstore/detail/auto-history-wipe/hdgnienkeomlaeeojaibeicglpoaadnj?hl=en ;
 }
 
 ################################################################################
@@ -74,13 +75,11 @@ app_name_git="git"
 app_name_git="qbittorrent"
 app_name_brave="brave"
 
-menu_title="Select\ software\ to\ automatically\ configure"
-menu_options="\
-'ytdlp [config + alias]' \
-'git [alias]' \
-'qbittorrent [upload 10kbps; autom. torrent removal when finished]' \
-'brave [extensions]' \
-"
+menu_title="'Auto configuration'"
+menu_options="'ytdlp' 'config + alias' \
+'git' 'alias' \
+'qbittorrent' 'upload 10kbps; autom. torrent removal when finished' \
+'brave' 'extensions'"
 
 ################################################################################
 # Show the menu                                                                #
@@ -96,17 +95,21 @@ app_menu_choices=$(eval "$menu_template")
 ################################################################################
 
 if grep -q "$app_name_ytdlp" <<< "$app_menu_choices"; then
+	echo "Configuring yt-dlp settings + setting yt-dlp aliases.." ;
 	func_cfg_ytdlp
 fi
 
 if grep -q "$app_name_git" <<< "$app_menu_choices"; then
+	echo "Setting Git aliases.." ;
 	func_cfg_git
 fi
 
 if grep -q "$app_name_qbittorrent" <<< "$app_menu_choices"; then
+	echo "Copying over qBittorrent configuration to system.." ;
 	func_cfg_qbittorrent
 fi
 
 if grep -q "$app_name_brave" <<< "$app_menu_choices"; then
+	echo "Redirecting to Brave browser extension pages.." ;
 	func_cfg_brave
 fi

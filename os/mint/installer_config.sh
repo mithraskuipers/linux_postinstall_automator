@@ -1,1 +1,1 @@
-menu_template="zenity --list --multiple --width=500 --height=500 --window-icon=question --title=${menu_title} --column='Name' ${menu_options}"
+menu_template="zenity --list --multiple --width=500 --height=500 --window-icon=question --title=${menu_title} --column='Name' --column='Description' ${menu_options}"
