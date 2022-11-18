@@ -19,9 +19,9 @@ function func_cfg_ytdlp()
 	cp $cfg_path_ytdlp_source_config $cfg_path_ytdlp_destination ;
 	cp $cfg_path_ytdlp_source_config_comments $cfg_path_ytdlp_destination ;
 	cp $cfg_path_ytdlp_source_config_audio $cfg_path_ytdlp_destination ;
-	sed -i '/ yt=/d' ~/.bashrc
-	sed -i '/ yta=/d' ~/.bashrc
-	sed -i '/ ytc=/d' ~/.bashrc
+	sed -i '/ yt=/d' ~/.bashrc ;
+	sed -i '/ yta=/d' ~/.bashrc ;
+	sed -i '/ ytc=/d' ~/.bashrc ;
 	echo 'alias yt="yt-dlp"' >> ~/.bashrc ;
 	echo 'alias yta="yt-dlp --config-location ~/.config/yt-dlp/config_audio"' >> ~/.bashrc ;
 	echo 'alias ytc="yt-dlp --config-location ~/.config/yt-dlp/config_comments"' >> ~/.bashrc ;
@@ -31,20 +31,22 @@ function func_cfg_ytdlp()
 # GIT
 function func_cfg_git()
 {
-	sed -i '/ gac=/d' ~/.bashrc
-	sed -i '/ gp=/d' ~/.bashrc
-	sed -i '/ gpf=/d' ~/.bashrc
-	sed -i '/ gpb=/d' ~/.bashrc
-	sed -i '/ gc=/d' ~/.bashrc
-	sed -i '/ gm=/d' ~/.bashrc
-	sed -i '/ gb=/d' ~/.bashrc
+	echo "Running func_cfg_git()" ;
+	sed -i '/ gac=/d' ~/.bashrc ;
+	sed -i '/ gp=/d' ~/.bashrc ;
+	sed -i '/ gpf=/d' ~/.bashrc ;
+	sed -i '/ gpb=/d' ~/.bashrc ;
+	sed -i '/ gc=/d' ~/.bashrc ;
+	sed -i '/ gm=/d' ~/.bashrc ;
+	sed -i '/ gb=/d' ~/.bashrc ;
 	echo 'alias gac="git add . && git commit -m"' >> ~/.bashrc ;
 	echo 'alias gp="git push"' >> ~/.bashrc ;
 	echo 'alias gpf="git push -f origin master"' >> ~/.bashrc ;
 	echo 'alias gpb="git push --set-upstream origin"' >> ~/.bashrc ;
-	echo 'alias gc="git checkout"' >> ~/.bashrc ;
 	echo 'alias gm="git merge"' >> ~/.bashrc ;
 	echo 'alias gb="git branch"' >> ~/.bashrc ;
+	echo 'alias gck="git checkout"' >> ~/.bashrc ;
+	echo 'alias gckm="git checkout master"' >> ~/.bashrc ;
 	return ;
 }
 
@@ -73,11 +75,6 @@ function func_cfg_brave()
 # Menu settings                                                                #
 ################################################################################
 
-app_name_ytdlp="ytdlp"
-app_name_git="git"
-app_name_git="qbittorrent"
-app_name_brave="brave"
-
 menu_title="'Auto configuration'"
 menu_options="'ytdlp' 'config + alias' \
 'git' 'alias' \
@@ -97,18 +94,18 @@ app_menu_choices=$(eval "$menu_template")
 # Install selected apps                                                        #
 ################################################################################
 
-if grep -q "$app_name_ytdlp" <<< "$app_menu_choices"; then
+if grep -q "ytdlp" <<< "$app_menu_choices"; then
 	func_cfg_ytdlp
 fi
 
-if grep -q "$app_name_git" <<< "$app_menu_choices"; then
-	func_cfg_git
+if grep -q "git" <<< "$app_menu_choices"; then
+	func_cfg_git ;
 fi
 
-if grep -q "$app_name_qbittorrent" <<< "$app_menu_choices"; then
+if grep -q "qbittorrent" <<< "$app_menu_choices"; then
 	func_cfg_qbittorrent
 fi
 
-if grep -q "$app_name_brave" <<< "$app_menu_choices"; then
+if grep -q "brave" <<< "$app_menu_choices"; then
 	func_cfg_brave
 fi
