@@ -122,7 +122,7 @@ menu_options="'Brave' 'browser'\
 			'xtrlock' 'keyboard lock'\
 			'xbindkeys' 'custom keyboard shortcuts'\
 			'vscode' 'engineering'\
-			'anaconda' 'engineering'\
+			'anaconda' 'data science'\
 			"
 
 ################################################################################
@@ -285,61 +285,15 @@ app_menu_choices=$(eval "$menu_template")
 # Install selected apps                                                        #
 ################################################################################
 
-if grep -q "$app_name_brave" <<< "$app_menu_choices"; then
+if grep -q "brave" <<< "$app_menu_choices"; then
 	func_install_brave
 fi
 
-if grep -q "$app_name_element" <<< "$app_menu_choices"; then
+if grep -q "element" <<< "$app_menu_choices"; then
 	echo $app_cmd_element | bash
 fi
 
-if grep -q "$app_name_git" <<< "$app_menu_choices"; then
-	echo $app_cmd_git | bash
-fi
-
-if grep -q "$app_name_make" <<< "$app_menu_choices"; then
-	echo $app_cmd_make | bash
-fi
-
-if grep -q "$app_name_gcc" <<< "$app_menu_choices"; then
-	echo $app_cmd_gcc | bash
-fi
-
-if grep -q "$app_name_clang" <<< "$app_menu_choices"; then
-	echo $app_cmd_clang | bash
-fi
-
-if grep -q "$app_name_gedit" <<< "$app_menu_choices"; then
-	echo $app_cmd_gedit | bash
-fi
-
-if grep -q "$app_name_ytdlp" <<< "$app_menu_choices"; then
-	echo $app_cmd_ytdlp | bash
-fi
-
-if grep -q "$app_name_wine64" <<< "$app_menu_choices"; then
-	echo $app_cmd_wine64 | bash
-fi
-
-if grep -q "$app_name_lutris" <<< "$app_menu_choices"; then
-	echo $app_cmd_lutris | bash
-fi
-
-if grep -q "$app_name_qbittorrent" <<< "$app_menu_choices"; then
-	func_install_qbittorrent
-fi
-
-if grep -q "$app_name_xtrlock" <<< "$app_menu_choices"; then
-	func_install_xtrlock
-fi
-
-if grep -q "$app_name_xbindkeys" <<< "$app_menu_choices"; then
-	func_install_xbindkeys
-fi
-
-if grep -q "$app_name_vscode" <<< "$app_menu_choices"; then
-	func_install_vscode
-fi
+if grep -q "git" <<< "$app_menu_choices"; then
 	echo $app_cmd_git | bash
 fi
 
@@ -347,7 +301,7 @@ if grep -q "make" <<< "$app_menu_choices"; then
 	echo $app_cmd_make | bash
 fi
 
-if grep -q "_gcc" <<< "$app_menu_choices"; then
+if grep -q "gcc" <<< "$app_menu_choices"; then
 	echo $app_cmd_gcc | bash
 fi
 
