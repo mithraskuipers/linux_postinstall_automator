@@ -71,6 +71,15 @@ function func_cfg_brave()
 	return ;
 }
 
+function func_cfg_spyder()
+{
+	cfg_path_spyder=${cfg_path}/os/shared/spyder ;
+	cfg_path_spyder_source=${cfg_path_spyder}/spyder.ini ;
+	cfg_path_spyder_destination=$(echo ~/.config/spyder-py3/config) ;
+	cp $cfg_path_spyder_source $cfg_path_spyder_destination ;
+	return ;
+}
+
 ################################################################################
 # Menu settings                                                                #
 ################################################################################
@@ -79,7 +88,9 @@ menu_title="'Auto configuration'"
 menu_options="'ytdlp' 'config + alias' \
 'git' 'alias' \
 'qbittorrent' 'upload 10kbps; autom. torrent removal when finished' \
-'brave' 'extensions'"
+'brave' 'extensions'\
+'spyder' 'config'\
+"
 
 ################################################################################
 # Show the menu                                                                #
@@ -108,4 +119,8 @@ fi
 
 if grep -q "brave" <<< "$app_menu_choices"; then
 	func_cfg_brave
+fi
+
+if grep -q "spyder" <<< "$app_menu_choices"; then
+	func_cfg_spyder
 fi
