@@ -88,8 +88,8 @@ menu_title="'Auto configuration'"
 menu_options="'ytdlp' 'config + alias' \
 'git' 'alias' \
 'qbittorrent' 'upload 10kbps; autom. torrent removal when finished' \
-'brave' 'extensions'\
-'spyder' 'config'\
+'brave' 'extensions' \
+'spyder' 'config' \
 "
 
 ################################################################################
