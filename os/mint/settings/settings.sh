@@ -73,6 +73,7 @@ function func_cfg_brave()
 
 function func_cfg_spyder()
 {
+	conda install spyder-terminal -c spyder-ide ;
 	cfg_path_spyder=${cfg_path}/os/shared/spyder ;
 	cfg_path_spyder_source=${cfg_path_spyder}/spyder.ini ;
 	cfg_path_spyder_destination=$(echo ~/.config/spyder-py3/config) ;
