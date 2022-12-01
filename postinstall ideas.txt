@@ -1,0 +1,10 @@
+how save custom keybindings
+how load custom keybindings
+
+# keyboard shortcuts
+
+lock keyboard
+keep window on top
+
+
+
