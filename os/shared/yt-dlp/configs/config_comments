@@ -11,10 +11,10 @@
 --compat-options no-keep-subs
 
 # Number of simultaneous downloading of parts
--N 2
+-N 4
 
 # Keep track of which videos you have already downloaded in the download folder
 --download-archive archive_list.txt
 
 # Configure such that yt-dlp uses the aria2 external downloader
---downloader aria2c --downloader-args aria2c:'--min-split-size=1M --max-connection-per-server=2 --max-concurrent-downloads=2 --split=4'
+--downloader aria2c --downloader-args aria2c:'--min-split-size=1M --max-connection-per-server=4 --max-concurrent-downloads=4 --split=4'
