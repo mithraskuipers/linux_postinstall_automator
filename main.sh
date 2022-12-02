@@ -18,6 +18,6 @@ if [[ $(grep PRETTY /etc/os-release | cut -c 13-) = *"Ubuntu"* ]]; then
 
 ## Start Mint installer
 
-	os/mint/run_ubuntu.sh
+	os/ubuntu/run_ubuntu.sh
 
 fi
