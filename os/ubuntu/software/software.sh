@@ -29,7 +29,7 @@ menu_options="'Brave' 'browser'\
 ################################################################################
 
 pwd_base=$(echo $(pwd))
-pwd_base=${pwd_base}"/os/mint"
+pwd_base=${pwd_base}"/os/ubuntu"
 source ${pwd_base}/installer_config.sh
 app_menu_choices=$(eval "$menu_template")
 
