@@ -25,6 +25,7 @@ function func_cfg_ytdlp()
 	echo 'alias yt="yt-dlp"' >> ~/.bashrc ;
 	echo 'alias yta="yt-dlp --config-location ~/.config/yt-dlp/config_audio"' >> ~/.bashrc ;
 	echo 'alias ytc="yt-dlp --config-location ~/.config/yt-dlp/config_comments"' >> ~/.bashrc ;
+    echo 'alias ytl=alias ytl="ls | awk -F"]" '{print $1}' | awk -F"[" '{print $NF}' > archive_list_new.txt"' >> archive_list_new.txt
 	return ;
 }
 
