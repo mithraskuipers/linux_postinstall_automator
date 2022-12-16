@@ -6,8 +6,7 @@
 
 menu_title="Install"
 
-menu_options="'Brave' 'browser'\
-			'clang' 'engineering'\
+menu_options="'clang' 'engineering'\
 			'Element' 'messenger'\
 			'GCC' 'engineering'\
 			'gedit' 'text editor'\
@@ -36,17 +35,6 @@ app_menu_choices=$(eval "$menu_template")
 ################################################################################
 # Application installation commands                                            #
 ################################################################################
-
-# BROWSER: BRAVE
-func_install_brave()
-{
-	echo $PASSWORD | udo apt install apt-transport-https curl ;
-	echo $PASSWORD | sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg ;
-	echo $PASSWORD | echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list ;
-	echo $PASSWORD | sudo apt update ;
-	echo $PASSWORD | sudo apt install brave-browser ;
-	return ;
-}
 
 # MESSENGER: ELEMENT
 app_cmd_element="echo $PASSWORD | \
@@ -139,10 +127,6 @@ func_install_rpiimager()
 ################################################################################
 # Install selected apps                                                        #
 ################################################################################
-
-if grep -q "brave" <<< "$app_menu_choices"; then
-	func_install_brave
-fi
 
 if grep -q "element" <<< "$app_menu_choices"; then
 	echo $app_cmd_element | bash

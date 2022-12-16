@@ -62,16 +62,6 @@ function func_cfg_qbittorrent()
 	return ;
 }
 
-# BRAVE EXTENSIONS
-function func_cfg_brave()
-{
-	brave-browser \
-		https://chrome.google.com/webstore/detail/adblock-for-youtube/cmedhionkhpnakcndndgjdbohmhepckk \
-		https://chrome.google.com/webstore/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle \
-		https://chrome.google.com/webstore/detail/auto-history-wipe/hdgnienkeomlaeeojaibeicglpoaadnj?hl=en ;
-	return ;
-}
-
 function func_cfg_spyder()
 {
 	conda install spyder-terminal -c spyder-ide ;
@@ -79,6 +69,14 @@ function func_cfg_spyder()
 	cfg_path_spyder_source=${cfg_path_spyder}/spyder.ini ;
 	cfg_path_spyder_destination=$(echo ~/.config/spyder-py3/config) ;
 	cp $cfg_path_spyder_source $cfg_path_spyder_destination ;
+	return ;
+}
+
+function func_cfg_keybindings()
+{
+	cfg_path_keybindings=${cfg_path}/os/mint/settings ;
+	cfg_path_keybindings_dconf=${cfg_path_keybindings}/dconf-settings_keybindings.conf ;
+    dconf load /org/cinnamon/desktop/keybindings/ < ${cfg_path_keybindings_dconf}
 	return ;
 }
 
@@ -90,8 +88,8 @@ menu_title="'Auto configuration'"
 menu_options="'ytdlp' 'config + alias' \
 'git' 'alias' \
 'qbittorrent' 'upload 10kbps; autom. torrent removal when finished' \
-'brave' 'extensions' \
 'spyder' 'config' \
+'keybindings' 'dconf' \
 "
 
 ################################################################################
@@ -119,10 +117,10 @@ if grep -q "qbittorrent" <<< "$app_menu_choices"; then
 	func_cfg_qbittorrent
 fi
 
-if grep -q "brave" <<< "$app_menu_choices"; then
-	func_cfg_brave
-fi
-
 if grep -q "spyder" <<< "$app_menu_choices"; then
 	func_cfg_spyder
+fi
+
+if grep -q "keybindings" <<< "$app_menu_choices"; then
+	func_cfg_keybindings
 fi
