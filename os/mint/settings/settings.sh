@@ -80,6 +80,13 @@ function func_cfg_keybindings()
 	return ;
 }
 
+function func_cfg_dconf_reset()
+{
+    dconf reset -f /
+	return ;
+}
+
+
 ################################################################################
 # Menu settings                                                                #
 ################################################################################
@@ -90,6 +97,7 @@ menu_options="'ytdlp' 'config + alias' \
 'qbittorrent' 'upload 10kbps; autom. torrent removal when finished' \
 'spyder' 'config' \
 'keybindings' 'dconf' \
+'dconf_reset' 'settings' \
 "
 
 ################################################################################
@@ -123,4 +131,8 @@ fi
 
 if grep -q "keybindings" <<< "$app_menu_choices"; then
 	func_cfg_keybindings
+fi
+
+if grep -q "dconf_reset" <<< "$app_menu_choices"; then
+	func_cfg_dconf_reset
 fi
