@@ -21,6 +21,7 @@ menu_options="'clang' 'engineering'\
 			'vscode' 'engineering'\
 			'zandronum' 'gaming'\
             'rpiimager' 'imager'\
+            'fonts' 'microsoft'\
 			"
 
 ################################################################################
@@ -124,6 +125,12 @@ func_install_rpiimager()
     echo $PASSWORD | sudo apt install rpi-imager -y;
 }
 
+
+func_install_ms_fonts()
+{
+    sudo apt install ttf-mscorefonts-installer
+}
+
 ################################################################################
 # Install selected apps                                                        #
 ################################################################################
@@ -190,4 +197,8 @@ fi
 
 if grep -q "rpiimager" <<< "$app_menu_choices"; then
     func_install_rpiimager
+fi
+
+if grep -q "fonts" <<< "$app_menu_choices"; then
+    func_install_ms_fonts
 fi
