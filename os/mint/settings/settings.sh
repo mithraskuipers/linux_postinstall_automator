@@ -48,6 +48,7 @@ function func_cfg_git()
 	echo 'alias gb="git branch"' >> ~/.bashrc ;
 	echo 'alias gck="git checkout"' >> ~/.bashrc ;
 	echo 'alias gckm="git checkout master"' >> ~/.bashrc ;
+    echo 'alias ghr="git fetch --all && git reset --hard && git pull"' >> ~/.bashrc ;
 	return ;
 }
 
