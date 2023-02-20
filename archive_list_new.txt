@@ -1,0 +1,1 @@
+alias ytl=alias ytl="ls | awk -F"]" {print } | awk -F"[" {print } > archive_list_new.txt"

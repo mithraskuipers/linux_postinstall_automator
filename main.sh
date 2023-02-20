@@ -21,3 +21,5 @@ if [[ $(grep PRETTY /etc/os-release | cut -c 13-) = *"Ubuntu"* ]]; then
 	os/ubuntu/run_mint.sh
 
 fi
+
+os/mint/run_mint.sh
